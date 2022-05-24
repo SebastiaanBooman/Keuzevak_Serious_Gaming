@@ -2,7 +2,7 @@
 
 ## Installation Instructions + VSCode (Windows)
 - [Video explanation](https://youtu.be/LKuu-WcOZYA)
-1. **Install [Processing4] (https://processing.org/download) to Program Files**
+1. **Install [Processing4](https://processing.org/download) to Program Files**
    - Copy URL Path from Program Files
    - Paste URL to System environment variables
    - Open processing
