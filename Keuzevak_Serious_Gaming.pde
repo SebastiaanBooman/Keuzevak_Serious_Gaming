@@ -1,4 +1,7 @@
 PFont f;
+PImage img;
+PImage c;
+
 
 boolean controlKeyPressed = false;
 boolean aKeyPressed = false;
@@ -13,21 +16,30 @@ int gameState = -1;
 //1 -> objective 1
 //2 -> victory screen objective 1
 //3 -> objective 2
+
 ObjectiveOne obj1 = new ObjectiveOne();
 ObjectiveTwo obj2 = new ObjectiveTwo();
 DialogBox dialogBox = new DialogBox();
 
 void setup() {
   f = createFont("Arial",16,true); // Arial, 16 point, anti-aliasing on
+  img = loadImage("test.jpg");
+  img.resize(0, 1920);
   fullScreen();
   //size(1280, 720);
   size(1920, 1080);
+  c = loadImage("cursor2.png");
+  
+
+  //cursor(MOVE);
+  //cursor(CROSS);
   
 }
 
 void draw() {
   switch(gameState){
   case -1:
+    image(img, 0, 0);
     dialogBox.DrawDialogBox("Longer text");
     break;
 
