@@ -7,7 +7,7 @@ boolean cKeyPressed = false;
 boolean vKeyPressed = false;
 boolean spacebarPressed = false;
 
-int gameState = 0;
+int gameState = -1;
 //game state refers to the condition of the game
 //0 -> intro screen
 //1 -> objective 1
@@ -15,6 +15,7 @@ int gameState = 0;
 //3 -> objective 2
 ObjectiveOne obj1 = new ObjectiveOne();
 ObjectiveTwo obj2 = new ObjectiveTwo();
+Interface IF = new Interface();
 
 void setup() {
   f = createFont("Arial",16,true); // Arial, 16 point, anti-aliasing on
@@ -25,6 +26,10 @@ void setup() {
 
 void draw() {
   switch(gameState){
+  case -1:
+    IF.printLayout();
+    break;
+
   case 0:
     obj1.stepOne();
     System.out.println("CONTROL KEY a: " + controlKeyPressed);
