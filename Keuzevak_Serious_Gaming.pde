@@ -15,19 +15,20 @@ int gameState = -1;
 //3 -> objective 2
 ObjectiveOne obj1 = new ObjectiveOne();
 ObjectiveTwo obj2 = new ObjectiveTwo();
-Interface IF = new Interface();
+DialogBox dialogBox = new DialogBox();
 
 void setup() {
   f = createFont("Arial",16,true); // Arial, 16 point, anti-aliasing on
-  //fullScreen();
-  size(1280, 720);
+  fullScreen();
+  //size(1280, 720);
+  size(1920, 1080);
   
 }
 
 void draw() {
   switch(gameState){
   case -1:
-    IF.printLayout();
+    dialogBox.DrawDialogBox("Longer text");
     break;
 
   case 0:
@@ -38,9 +39,7 @@ void draw() {
     break;
   case 1:
     obj1.drawVictoryScreen();
-    if(spacebarPressed){
-      gameState = 2;
-    }
+    if(spacebarPressed) gameState = 2;
     break;
    case 2:
      obj2.stepOne();
@@ -52,9 +51,7 @@ void draw() {
        break;
     case 4:
       obj2.stepThree();
-      if(controlKeyPressed && vKeyPressed){
-        gameState = 5;
-      }
+      if(controlKeyPressed && vKeyPressed) gameState = 5;
       break;
     case 5:
       obj2.drawVictoryScreen();
