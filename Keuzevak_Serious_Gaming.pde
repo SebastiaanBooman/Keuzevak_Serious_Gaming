@@ -2,7 +2,6 @@ PFont f;
 PImage img;
 PImage c;
 
-
 boolean controlKeyPressed = false;
 boolean aKeyPressed = false;
 boolean sKeyPressed = false;
@@ -41,33 +40,36 @@ void draw() {
   case -1:
     image(img, 0, 0);
     dialogBox.DrawDialogBox("Longer text");
+    //rect(1300, 250, 300, 550);
+    if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
+    else cursor(ARROW);
     break;
 
   case 0:
     obj1.stepOne();
-    System.out.println("CONTROL KEY a: " + controlKeyPressed);
-    System.out.println("a KEY a: " + aKeyPressed);
+    //System.out.println("CONTROL KEY a: " + controlKeyPressed);
+    //System.out.println("a KEY a: " + aKeyPressed);
     if(controlKeyPressed && aKeyPressed) gameState = 1;
     break;
   case 1:
     obj1.drawVictoryScreen();
     if(spacebarPressed) gameState = 2;
     break;
-   case 2:
-     obj2.stepOne();
-     if(controlKeyPressed && sKeyPressed) gameState = 3;
-      break;
-    case 3:
-      obj2.stepTwo();
-      if(controlKeyPressed && cKeyPressed) gameState = 4;
-       break;
-    case 4:
-      obj2.stepThree();
-      if(controlKeyPressed && vKeyPressed) gameState = 5;
-      break;
-    case 5:
-      obj2.drawVictoryScreen();
-      break;
+  case 2:
+    obj2.stepOne();
+    if(controlKeyPressed && sKeyPressed) gameState = 3;
+    break;
+  case 3:
+    obj2.stepTwo();
+    if(controlKeyPressed && cKeyPressed) gameState = 4;
+    break;
+  case 4:
+    obj2.stepThree();
+    if(controlKeyPressed && vKeyPressed) gameState = 5;
+    break;
+  case 5:
+    obj2.drawVictoryScreen();
+    break;
   default:
     break;
   }
