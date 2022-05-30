@@ -1,7 +1,9 @@
 PFont f;
 PImage img;
 PImage c;
+PImage inventory_img;
 
+boolean backSpaceKeyPressed = false;
 boolean controlKeyPressed = false;
 boolean aKeyPressed = false;
 boolean sKeyPressed = false;
@@ -9,7 +11,7 @@ boolean cKeyPressed = false;
 boolean vKeyPressed = false;
 boolean spacebarPressed = false;
 boolean iKeyPressed = false;
-int load_image = 416;
+
 int gameState = 0;
 //game state refers to the condition of the game
 //0 -> intro screen
@@ -30,11 +32,9 @@ void setup() {
   //size(1280, 720);
   size(1920, 1080);
   c = loadImage("cursor2.png");
-  
-
+  inventory_img = loadImage("burlap-sack.png");
   //cursor(MOVE);
   //cursor(CROSS);
-  
 }
 void draw() {
   background(255);
@@ -45,16 +45,16 @@ void draw() {
     //rect(1300, 250, 300, 550);
     if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
     else cursor(ARROW);
-    if(iKeyPressed) inventory.DrawInventory(0, true);
+    if(iKeyPressed) gameState = 1; //image(inventory_img, 0, 0);
     break;
   case 1:
-    image(img, 0, 0, load_image, load_image);
-    dialogBox.DrawDialogBox("2nd screen");
-    //rect(1300, 250, 300, 550);
+    image(img, 0, 0);
+    dialogBox.DrawDialogBox("Open your inventory [i]");
     inventory.DrawInventory(0);
+    //rect(1300, 250, 300, 550);
     if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
     else cursor(ARROW);
-    if(!iKeyPressed) gameState = 0;
+    if(backSpaceKeyPressed) gameState = 0;  //image(inventory_img, 0, 0);
     break;
   default:
     break;
@@ -96,6 +96,7 @@ void draw() {
 
 void keyPressed(){
   if(keyCode == CONTROL) controlKeyPressed = true;
+  if(keyCode == 8) backSpaceKeyPressed = true;
   if(keyCode == 73) iKeyPressed = true; // i
   else if(keyCode == 65 && controlKeyPressed) aKeyPressed = true; //a
   else if(keyCode == 83 && controlKeyPressed) sKeyPressed = true; //s
@@ -106,6 +107,7 @@ void keyPressed(){
 
 void keyReleased(){  
   switch(keyCode){
+  case 8: backSpaceKeyPressed = false; //backspace
   case 65: aKeyPressed = false; //a
   case 67: cKeyPressed = false; //c
   case 73: iKeyPressed = false; //i
