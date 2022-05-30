@@ -8,8 +8,9 @@ boolean sKeyPressed = false;
 boolean cKeyPressed = false;
 boolean vKeyPressed = false;
 boolean spacebarPressed = false;
-
-int gameState = -1;
+boolean iKeyPressed = false;
+int load_image = 416;
+int gameState = 0;
 //game state refers to the condition of the game
 //0 -> intro screen
 //1 -> objective 1
@@ -19,6 +20,7 @@ int gameState = -1;
 ObjectiveOne obj1 = new ObjectiveOne();
 ObjectiveTwo obj2 = new ObjectiveTwo();
 DialogBox dialogBox = new DialogBox();
+Inventory inventory = new Inventory();
 
 void setup() {
   f = createFont("Arial",16,true); // Arial, 16 point, anti-aliasing on
@@ -34,17 +36,33 @@ void setup() {
   //cursor(CROSS);
   
 }
-
 void draw() {
+  background(255);
   switch(gameState){
-  case -1:
+  case 0:
     image(img, 0, 0);
-    dialogBox.DrawDialogBox("Longer text");
+    dialogBox.DrawDialogBox("Open your inventory [i]");
     //rect(1300, 250, 300, 550);
     if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
     else cursor(ARROW);
+    if(iKeyPressed) inventory.DrawInventory(0, true);
     break;
-
+  case 1:
+    image(img, 0, 0, load_image, load_image);
+    dialogBox.DrawDialogBox("2nd screen");
+    //rect(1300, 250, 300, 550);
+    inventory.DrawInventory(0);
+    if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
+    else cursor(ARROW);
+    if(!iKeyPressed) gameState = 0;
+    break;
+  default:
+    break;
+  }
+}
+/*
+void draw() {
+  switch(gameState){
   case 0:
     obj1.stepOne();
     //System.out.println("CONTROL KEY a: " + controlKeyPressed);
@@ -74,9 +92,11 @@ void draw() {
     break;
   }
 }
+*/
 
 void keyPressed(){
   if(keyCode == CONTROL) controlKeyPressed = true;
+  if(keyCode == 73) iKeyPressed = true; // i
   else if(keyCode == 65 && controlKeyPressed) aKeyPressed = true; //a
   else if(keyCode == 83 && controlKeyPressed) sKeyPressed = true; //s
   else if(keyCode == 86 && controlKeyPressed) vKeyPressed = true; //v
@@ -88,6 +108,7 @@ void keyReleased(){
   switch(keyCode){
   case 65: aKeyPressed = false; //a
   case 67: cKeyPressed = false; //c
+  case 73: iKeyPressed = false; //i
   case 86: vKeyPressed = false; //v
   case 83: sKeyPressed = false; //s
   case CONTROL: controlKeyPressed = false;
