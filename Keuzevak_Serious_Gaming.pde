@@ -1,8 +1,9 @@
 PFont f;
-PImage img;
-PImage c;
-PImage inventory_img;
-PImage background2;
+PImage backgroundImg1;
+PImage backgroundImg2;
+
+PImage inventoryImg1;
+PImage inventoryImg2;
 
 boolean backSpaceKeyPressed = false;
 boolean controlKeyPressed = false;
@@ -15,10 +16,6 @@ boolean iKeyPressed = false;
 
 int gameState = 0;
 //game state refers to the condition of the game
-//0 -> intro screen
-//1 -> objective 1
-//2 -> victory screen objective 1
-//3 -> objective 2
 
 ObjectiveOne obj1 = new ObjectiveOne();
 ObjectiveTwo obj2 = new ObjectiveTwo();
@@ -26,25 +23,28 @@ DialogBox dialogBox = new DialogBox();
 Inventory inventory = new Inventory();
 
 void setup() {
+  //SETUP FONTS
   f = createFont("Arial",16,true); // Arial, 16 point, anti-aliasing on
-  img = loadImage("test.jpg");
-  img.resize(0, 1920);
+
+  //SETUP IMAGES TODO: DELEGATE THIS TO SEPARATE FUNCTIONS
+  backgroundImg1 = loadImage("test.jpg");
+  backgroundImg1.resize(0, 1920);
+
+  inventoryImg1 = loadImage("burlap-sack.png");
+  inventoryImg2 = loadImage("burlap-sack-scroll.png");
+
+  backgroundImg2 = loadImage("test2.jpg");
+  backgroundImg2.resize(0,1920);
+  //SETUP SCREEN
   fullScreen();
   //size(1280, 720);
   size(1920, 1080);
-  c = loadImage("cursor2.png");
-  inventory_img = loadImage("burlap-sack.png");
-
-  background2 = loadImage("test2.jpg");
-  background2.resize(0,1920);
-  //cursor(MOVE);
-  //cursor(CROSS);
 }
 void draw() {
   background(255);
   switch(gameState){
   case 0:
-    image(img, 0, 0);
+    image(backgroundImg1, 0, 0);
     dialogBox.DrawDialogBox("Open your inventory [i]");
     //rect(1300, 250, 300, 550);
     if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
@@ -52,16 +52,23 @@ void draw() {
     if(iKeyPressed) gameState = 1; //image(inventory_img, 0, 0);
     break;
   case 1:
-    image(img, 0, 0);
+    image(backgroundImg1, 0, 0);
     dialogBox.DrawDialogBox("Close your inventory [backspace]");
-    inventory.DrawInventory(0);
-    //rect(1300, 250, 300, 550);
-    if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
+    inventory.DrawInventory(gameState);
+    rect(150, 160, 100, 50);
+    //if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
+    //else cursor(ARROW);
+    if((mouseX >= 150 && mouseX <= 250) && (mouseY >= 160 && mouseY <= 210)) cursor(HAND);
     else cursor(ARROW);
     if(backSpaceKeyPressed) gameState = 0;  //image(inventory_img, 0, 0);
     break;
   case 2:
-    image(background2, 0, 0);
+    image(backgroundImg1, 0, 0);
+    dialogBox.DrawDialogBox("Scroll obtained!");
+    inventory.DrawInventory(gameState);
+    break;
+  case 3:
+    image(backgroundImg2, 0, 0);
     dialogBox.DrawDialogBox("Example text");
     break;
   default:
@@ -106,7 +113,7 @@ void mouseClicked(){
   case 0:
     if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850)){
       cursor(ARROW);
-      gameState = 2;
+      gameState = 3;
    }
     break;
   default:

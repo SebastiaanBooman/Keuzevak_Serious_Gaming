@@ -4,9 +4,11 @@ public class Inventory{
         switch(gameState){
         case 0:
             //img = loadImage("burlap-sack.png");
-            image(inventory_img, 0, 0);
+            image(inventoryImg1, 0, 0);
             return;
-            //break;
+        case 1:
+            image(inventoryImg2, 0, 0);
+            return;
         default:
             break;
       }
