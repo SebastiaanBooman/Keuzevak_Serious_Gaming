@@ -2,6 +2,7 @@ PFont f;
 PImage img;
 PImage c;
 PImage inventory_img;
+PImage background2;
 
 boolean backSpaceKeyPressed = false;
 boolean controlKeyPressed = false;
@@ -33,6 +34,9 @@ void setup() {
   size(1920, 1080);
   c = loadImage("cursor2.png");
   inventory_img = loadImage("burlap-sack.png");
+
+  background2 = loadImage("test2.jpg");
+  background2.resize(0,1920);
   //cursor(MOVE);
   //cursor(CROSS);
 }
@@ -49,12 +53,16 @@ void draw() {
     break;
   case 1:
     image(img, 0, 0);
-    dialogBox.DrawDialogBox("Open your inventory [i]");
+    dialogBox.DrawDialogBox("Close your inventory [backspace]");
     inventory.DrawInventory(0);
     //rect(1300, 250, 300, 550);
     if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
     else cursor(ARROW);
     if(backSpaceKeyPressed) gameState = 0;  //image(inventory_img, 0, 0);
+    break;
+  case 2:
+    image(background2, 0, 0);
+    dialogBox.DrawDialogBox("Example text");
     break;
   default:
     break;
@@ -93,7 +101,18 @@ void draw() {
   }
 }
 */
-
+void mouseClicked(){
+  switch(gameState){
+  case 0:
+    if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850)){
+      cursor(ARROW);
+      gameState = 2;
+   }
+    break;
+  default:
+    break;
+  }
+}
 void keyPressed(){
   if(keyCode == CONTROL) controlKeyPressed = true;
   if(keyCode == 8) backSpaceKeyPressed = true;
