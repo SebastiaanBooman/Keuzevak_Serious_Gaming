@@ -46,7 +46,6 @@ void draw() {
   case 0:
     image(backgroundImg1, 0, 0);
     dialogBox.DrawDialogBox("Open your inventory [i]");
-    //rect(1300, 250, 300, 550);
     if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
     else cursor(ARROW);
     if(iKeyPressed) gameState = 1; //image(inventory_img, 0, 0);
@@ -55,17 +54,17 @@ void draw() {
     image(backgroundImg1, 0, 0);
     dialogBox.DrawDialogBox("Close your inventory [backspace]");
     inventory.DrawInventory(gameState);
-    rect(150, 160, 100, 50);
-    //if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
+    //rect(150, 160, 100, 50);
+    if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
     //else cursor(ARROW);
-    if((mouseX >= 150 && mouseX <= 250) && (mouseY >= 160 && mouseY <= 210)) cursor(HAND);
+    else if((mouseX >= 150 && mouseX <= 250) && (mouseY >= 160 && mouseY <= 210)) cursor(HAND);
     else cursor(ARROW);
     if(backSpaceKeyPressed) gameState = 0;  //image(inventory_img, 0, 0);
     break;
   case 2:
     image(backgroundImg1, 0, 0);
     dialogBox.DrawDialogBox("Scroll obtained!");
-    inventory.DrawInventory(gameState);
+    inventory.DrawInventory(0);
     break;
   case 3:
     image(backgroundImg2, 0, 0);
@@ -115,6 +114,12 @@ void mouseClicked(){
       cursor(ARROW);
       gameState = 3;
    }
+    break;
+  case 1:
+    if((mouseX >= 150 && mouseX <= 250) && (mouseY >= 160 && mouseY <= 210)){
+      cursor(ARROW);
+      gameState = 2;
+    }
     break;
   default:
     break;
