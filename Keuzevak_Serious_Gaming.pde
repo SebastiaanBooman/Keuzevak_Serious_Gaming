@@ -40,6 +40,7 @@ void setup() {
   //size(1280, 720);
   size(1920, 1080);
 }
+
 void draw() {
   background(255);
   switch(gameState){
@@ -48,18 +49,16 @@ void draw() {
     dialogBox.DrawDialogBox("Open your inventory [i]");
     if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
     else cursor(ARROW);
-    if(iKeyPressed) gameState = 1; //image(inventory_img, 0, 0);
+    if(iKeyPressed) gameState = 1;
     break;
   case 1:
     image(backgroundImg1, 0, 0);
     dialogBox.DrawDialogBox("Close your inventory [backspace]");
     inventory.DrawInventory(gameState);
-    //rect(150, 160, 100, 50);
     if((mouseX >= 1300 && mouseX <= 1550)  && (mouseY >= 300 && mouseY <= 850) ) cursor(HAND);
-    //else cursor(ARROW);
     else if((mouseX >= 150 && mouseX <= 250) && (mouseY >= 160 && mouseY <= 210)) cursor(HAND);
     else cursor(ARROW);
-    if(backSpaceKeyPressed) gameState = 0;  //image(inventory_img, 0, 0);
+    if(backSpaceKeyPressed) gameState = 0;
     break;
   case 2:
     image(backgroundImg1, 0, 0);
@@ -74,39 +73,7 @@ void draw() {
     break;
   }
 }
-/*
-void draw() {
-  switch(gameState){
-  case 0:
-    obj1.stepOne();
-    //System.out.println("CONTROL KEY a: " + controlKeyPressed);
-    //System.out.println("a KEY a: " + aKeyPressed);
-    if(controlKeyPressed && aKeyPressed) gameState = 1;
-    break;
-  case 1:
-    obj1.drawVictoryScreen();
-    if(spacebarPressed) gameState = 2;
-    break;
-  case 2:
-    obj2.stepOne();
-    if(controlKeyPressed && sKeyPressed) gameState = 3;
-    break;
-  case 3:
-    obj2.stepTwo();
-    if(controlKeyPressed && cKeyPressed) gameState = 4;
-    break;
-  case 4:
-    obj2.stepThree();
-    if(controlKeyPressed && vKeyPressed) gameState = 5;
-    break;
-  case 5:
-    obj2.drawVictoryScreen();
-    break;
-  default:
-    break;
-  }
-}
-*/
+
 void mouseClicked(){
   switch(gameState){
   case 0:
