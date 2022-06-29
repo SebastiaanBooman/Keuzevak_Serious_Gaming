@@ -37,7 +37,7 @@ void keyPressed(){
 void keyReleased(){  
   switch(keyCode){
   case 8: backSpaceKeyPressed = false; //backspace
-  case 13: enterKeyPressed = false; //enter
+  case ENTER: enterKeyPressed = false; //enter
   
   case 65: aKeyPressed = false; //a
   case 66: bKeyPressed = false; //b
